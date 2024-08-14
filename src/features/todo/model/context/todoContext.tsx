@@ -1,5 +1,11 @@
 import { TodoType } from "@/entities/todo"
-import React, { createContext, ReactNode, useContext, useState } from "react"
+import React, {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState,
+} from "react"
 
 interface TodoContextType {
     todos: TodoType[]
@@ -12,11 +18,27 @@ const TodoContext = createContext<TodoContextType | undefined>(undefined)
 export const TodoProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
-    const [todos, setTodos] = useState<TodoType[]>([
+    const [todos, setTodos] = useState<TodoType[]>([])
+
+    const initialTodos: TodoType[] = [
         { id: 1, text: "Task 1", completed: false },
         { id: 2, text: "Task 2", completed: true },
         { id: 3, text: "Task 3", completed: false },
-    ])
+    ]
+
+    useEffect(() => {
+        const storedTodos = localStorage.getItem("todos")
+        if (storedTodos) {
+            setTodos(JSON.parse(storedTodos))
+        } else {
+            setTodos(initialTodos)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos))
+    }, [todos])
 
     const handleToggle = (id: number) => {
         setTodos((prevTodos) =>
@@ -46,7 +68,7 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
 export const useTodosContext = () => {
     const context = useContext(TodoContext)
     if (!context) {
-        throw new Error()
+        throw new Error("useTodosContext must be used within a TodoProvider")
     }
     return context
 }
