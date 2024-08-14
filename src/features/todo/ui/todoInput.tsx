@@ -31,24 +31,6 @@ export const TodoInput: FC<TodoInputProps> = ({ onAdd }) => {
                 onKeyDown={handleKeyDown}
                 placeholder="What needs to be done?"
                 variant="outlined"
-                sx={{
-                    backgroundColor: "#333333",
-                    color: "#ffffff",
-                    "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                            borderColor: "#555555",
-                        },
-                        "&:hover fieldset": {
-                            borderColor: "#ffffff",
-                        },
-                        "&.Mui-focused fieldset": {
-                            borderColor: "#ffffff",
-                        },
-                    },
-                    "& .MuiInputBase-input": {
-                        color: "#ffffff",
-                    },
-                }}
             />
             <Button
                 variant="contained"
