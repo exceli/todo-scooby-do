@@ -1,15 +1,17 @@
 import { Checkbox as MuiCheckbox } from "@mui/material"
-import { FC } from "react"
+import { FC, SyntheticEvent } from "react"
 
 interface CheckboxProps {
     position: "start" | "end"
     checked: boolean
-    handleToggle: () => void
+    onClick?: (e: SyntheticEvent) => void
+    handleToggle?: () => void
 }
 
 export const Checkbox: FC<CheckboxProps> = ({
     position,
     checked,
+    onClick,
     handleToggle,
     ...props
 }) => {
@@ -17,6 +19,7 @@ export const Checkbox: FC<CheckboxProps> = ({
         <MuiCheckbox
             edge={position}
             checked={checked}
+            onClick={onClick}
             onChange={handleToggle}
             {...props}
         />

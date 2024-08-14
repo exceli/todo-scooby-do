@@ -4,7 +4,7 @@ import React from "react"
 import { TodoProvider, useTodosContext } from "./todoContext"
 
 const TestComponent: React.FC = () => {
-    const { todos, handleToggle, addTodo } = useTodosContext()
+    const { todos, handleToggle, addTodo, removeTodo } = useTodosContext()
 
     return (
         <div>
@@ -22,6 +22,7 @@ const TestComponent: React.FC = () => {
                     >
                         {todo.text}
                     </span>
+                    <button onClick={() => removeTodo(todo.id)}>Удалить</button>
                     <button onClick={() => handleToggle(todo.id)}>
                         Переключить
                     </button>
@@ -53,6 +54,19 @@ describe("TodoContext", () => {
 
         fireEvent.click(screen.getByText("Добавить задачу"))
         expect(screen.getByText("Новая задача")).toBeInTheDocument()
+    })
+
+    it("должен удалять задачу", () => {
+        render(
+            <TodoProvider>
+                <TestComponent />
+            </TodoProvider>
+        )
+
+        const deleteButtons = screen.getAllByText("Удалить")
+        fireEvent.click(deleteButtons[0])
+
+        expect(screen.queryByText("Task 1")).toBeNull()
     })
 
     it("должен переключать задачу", () => {

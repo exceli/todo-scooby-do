@@ -11,6 +11,7 @@ interface TodoContextType {
     todos: TodoType[]
     handleToggle: (id: number) => void
     addTodo: (text: string) => void
+    removeTodo: (id: number) => void
 }
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined)
@@ -57,8 +58,19 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
         setTodos([...todos, newTodo])
     }
 
+    const removeTodo = (id: number) => {
+        setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id))
+    }
+
     return (
-        <TodoContext.Provider value={{ todos, handleToggle, addTodo }}>
+        <TodoContext.Provider
+            value={{
+                todos,
+                handleToggle,
+                addTodo,
+                removeTodo,
+            }}
+        >
             {children}
         </TodoContext.Provider>
     )
