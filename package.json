@@ -1,5 +1,6 @@
 {
     "name": "todo-scooby-doo",
+    "homepage": "https://exceli.github.io/todo-scooby-do",
     "private": true,
     "version": "0.0.0",
     "type": "module",
