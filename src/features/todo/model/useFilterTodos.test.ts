@@ -1,5 +1,5 @@
 import { TodoType } from '@/entities/todo'
-import { useFilteredTodos } from '@/features/todoFilter/model/useFilterTodos'
+import { useFilteredTodos } from '@/features/todo/model/useFilterTodos'
 
 describe('useFilteredTodos', () => {
     const todos: TodoType[] = [
