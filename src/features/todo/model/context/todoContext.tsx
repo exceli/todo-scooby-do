@@ -42,6 +42,7 @@ export const TodoProvider: React.FC<{ children: ReactNode }> = ({
     )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTodosContext = () => {
     const context = useContext(TodoContext)
     if (!context) {

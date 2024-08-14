@@ -17,7 +17,7 @@ export const MainPage: FC = () => {
         <Container>
             <Typography variant="h1">todos</Typography>
             <TodoInput onAdd={addTodo} />
-            <Box sx={{ width: "100%", backgroundColor: "gray" }}>
+            <Box sx={{ width: "100%", backgroundColor: "#333333" }}>
                 <TodoList todos={filteredTodos} onToggle={handleToggle} />
             </Box>
             <TodoFilterTabs value={tab} onChange={handleChange} />

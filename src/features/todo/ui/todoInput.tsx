@@ -1,6 +1,6 @@
 import { Button } from "@/shared/button"
 import { Box, TextField } from "@mui/material"
-import { FC, useState } from "react"
+import { FC, KeyboardEvent, useState } from "react"
 
 interface TodoInputProps {
     onAdd: (text: string) => void
@@ -16,14 +16,39 @@ export const TodoInput: FC<TodoInputProps> = ({ onAdd }) => {
         }
     }
 
+    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === "Enter") {
+            handleAdd()
+        }
+    }
+
     return (
         <Box display="flex" mb={2}>
             <TextField
                 fullWidth
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="What needs to be done?"
                 variant="outlined"
+                sx={{
+                    backgroundColor: "#333333",
+                    color: "#ffffff",
+                    "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                            borderColor: "#555555",
+                        },
+                        "&:hover fieldset": {
+                            borderColor: "#ffffff",
+                        },
+                        "&.Mui-focused fieldset": {
+                            borderColor: "#ffffff",
+                        },
+                    },
+                    "& .MuiInputBase-input": {
+                        color: "#ffffff",
+                    },
+                }}
             />
             <Button
                 variant="contained"

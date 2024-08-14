@@ -1,4 +1,4 @@
-import { TodoType } from '@/entities/todo'
+import { TodoType } from "@/entities/todo"
 
 export const useFilteredTodos = (todos: TodoType[], filter: number) => {
     return todos.filter((todo) => {
